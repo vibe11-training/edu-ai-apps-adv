@@ -148,7 +148,7 @@ async function setup(kind, fetchData) {
 
 function fill(form, kind) {
   const values = {
-    subject: "과학", level: "초등학교 5학년", topic: "태양계", goal: "행성의 특징 설명",
+    subject: "중학교 정보", level: "중1", topic: "알고리즘과 프로그래밍", goal: "알고리즘의 개념 설명",
     ...(kind === "quiz" ? { count: "3", difficulty: "보통" } : {
       duration: "40", students: "30", groupSize: "4", conditions: "",
     }),
@@ -157,6 +157,37 @@ function fill(form, kind) {
 }
 
 for (const kind of ["quiz", "activity"]) {
+  test(`${kind}: 과목, 학년, 주제를 목록에서 선택하고 목표를 직접 입력한다`, async () => {
+    const html = await readFile(new URL(`../public/${kind}.html`, import.meta.url), "utf8");
+    const expectedOptions = {
+      subject: ["중학교 정보", "고등학교 정보", "인공지능 기초", "데이터 과학", "소프트웨어와 생활", "프로그래밍"],
+      level: ["중1", "중2", "중3", "고1", "고2", "고3"],
+      topic: ["컴퓨팅 시스템", "데이터", "알고리즘과 프로그래밍", "인공지능", "디지털 문화"],
+    };
+    for (const [name, expected] of Object.entries(expectedOptions)) {
+      const select = html.match(new RegExp(`<select\\b[^>]*\\bname="${name}"[^>]*>([\\s\\S]*?)</select>`));
+      assert.ok(select, `${name} 선택 목록`);
+      assert.match(select[1], /^\s*<option value="">/);
+      const options = [...select[1].matchAll(/<option(?:\s[^>]*)?>([^<]*)<\/option>/g)].map((option) => option[1]);
+      assert.deepEqual(options, ["선택해 주세요", ...expected]);
+    }
+    assert.match(html, /<textarea\b[^>]*\bname="goal"[^>]*\brequired\b/);
+
+    let request;
+    const ui = await setup(kind, async (url, options) => {
+      request = JSON.parse(options.body);
+      return response(kind === "quiz" ? quiz.slice(0, 3) : activities);
+    });
+    try {
+      fill(ui.form, kind);
+      await ui.submit();
+      assert.equal(request.input.subject, "중학교 정보");
+      assert.equal(request.input.level, "중1");
+      assert.equal(request.input.topic, "알고리즘과 프로그래밍");
+      assert.equal(request.input.goal, "알고리즘의 개념 설명");
+    } finally { ui.cleanup(); }
+  });
+
   test(`${kind}: 필수 항목을 빠뜨리면 해당 항목을 안내하고 요청하지 않는다`, async () => {
     let requests = 0;
     const ui = await setup(kind, async () => { requests++; return response([]); });
@@ -170,7 +201,7 @@ for (const kind of ["quiz", "activity"]) {
         assert.ok(field, `${name} 필드 존재`);
         assert.equal(field.required, true, `${name} 필수`);
         const value = field.value;
-        field.value = " ";
+        field.value = field.type === "select-one" ? "" : " ";
         await ui.submit();
         assert.match(ui.errors[`${field.id}-error`].textContent, /입력/);
         assert.equal(field.attributes["aria-invalid"], "true");
@@ -398,9 +429,9 @@ test("활동 CSV 버튼은 결과가 있을 때만 활성화되고 서버를 호
         });
         try {
           fill(ui.form, kind);
-          Object.assign(ui.form.elements.subject, { value: " 수학 " });
-          ui.form.elements.topic.value = "분수";
-          ui.form.elements.goal.value = "분수의 크기를 비교한다";
+          ui.form.elements.subject.value = "데이터 과학";
+          ui.form.elements.topic.value = "데이터";
+          ui.form.elements.goal.value = "데이터를 분석한다";
           if (kind === "activity") ui.form.elements.conditions.value = "종이 없이 진행";
           await ui.submit();
           assert.ok(calls.length > 0, "생성 요청이 있어야 한다");
