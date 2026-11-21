@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>학습활동 추천 | 수업 준비 도우미</title>
+  <link rel="stylesheet" href="styles.css">
+  <script type="module" src="js/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">본문으로 건너뛰기</a>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">✦</span> 수업 준비 도우미</a>
+      <p class="nav-label">수업 도구</p>
+      <nav aria-label="수업 도구">
+        <a class="nav-link" href="quiz.html"><span aria-hidden="true">▤</span> 퀴즈 생성기</a>
+        <a class="nav-link" href="activity.html" aria-current="page"><span aria-hidden="true">◇</span> 학습활동 추천</a>
+      </nav>
+      <p class="sidebar-note">선생님의 수업 준비를<br>조금 더 가볍게.</p>
+    </aside>
+    <main class="main" id="main-content" tabindex="-1">
+      <div class="content">
+        <p class="eyebrow">수업 도구 / 학습활동 추천</p>
+        <h1>학습활동 추천</h1>
+        <p class="intro">수업 정보를 입력하고 추천 활동을 확인해 보세요.</p>
+        <p class="notice">형식과 시간 검증은 내용의 정확성이나 수업 적합성을 보장하지 않으므로 사용 전 교사가 확인해 주세요. 결과 수정 기능은 제공되지 않습니다.</p>
+        <div class="workspace">
+          <section class="card">
+            <div class="section-heading">
+              <div><p class="step">01 / 수업 정보</p><h2>어떤 활동을 준비할까요?</h2></div>
+              <span class="badge">활동 계획</span>
+            </div>
+            <p class="muted section-description">필수 항목을 모두 입력해 주세요.</p>
+            <form id="preparation-form" novalidate>
+              <div class="fields">
+                <div class="field"><label for="subject">과목 <span>필수</span></label><input id="subject" name="subject" data-label="과목" required placeholder="예: 과학" aria-describedby="subject-error"><p class="error" id="subject-error" aria-live="polite"></p></div>
+                <div class="field"><label for="level">학년 또는 수준 <span>필수</span></label><input id="level" name="level" data-label="학년 또는 수준" required placeholder="예: 초등학교 5학년" aria-describedby="level-error"><p class="error" id="level-error" aria-live="polite"></p></div>
+                <div class="field full"><label for="topic">학습 주제 <span>필수</span></label><input id="topic" name="topic" data-label="학습 주제" required placeholder="예: 태양계와 행성" aria-describedby="topic-error"><p class="error" id="topic-error" aria-live="polite"></p></div>
+                <div class="field full"><label for="goal">학습 목표 <span>필수</span></label><textarea id="goal" name="goal" data-label="학습 목표" required rows="3" placeholder="예: 태양계 행성의 특징을 설명할 수 있다." aria-describedby="goal-error"></textarea><p class="error" id="goal-error" aria-live="polite"></p></div>
+                <div class="field"><label for="duration">활동 시간 <span>필수</span></label><input id="duration" name="duration" data-label="활동 시간" type="number" min="1" max="180" step="1" required placeholder="1~180분" aria-describedby="duration-help duration-error"><p class="hint" id="duration-help">1~180분의 정수</p><p class="error" id="duration-error" aria-live="polite"></p></div>
+                <div class="field"><label for="students">학급 규모 <span>필수</span></label><input id="students" name="students" data-label="학급 규모" type="number" min="1" max="100" step="1" required placeholder="1~100명" aria-describedby="students-help students-error"><p class="hint" id="students-help">학생 수 1~100명의 정수</p><p class="error" id="students-error" aria-live="polite"></p></div>
+                <div class="field"><label for="group-size">모둠 인원 <span>필수</span></label><input id="group-size" name="groupSize" data-label="모둠 인원" type="number" min="2" max="6" step="1" required placeholder="2~6명" aria-describedby="group-size-help group-size-error"><p class="hint" id="group-size-help">2~6명의 정수</p><p class="error" id="group-size-error" aria-live="polite"></p></div>
+                <div class="field full"><label for="conditions">운영 조건 <span>선택</span></label><textarea id="conditions" name="conditions" data-label="운영 조건" rows="3" placeholder="예: 교실에서 별도 준비물 없이 진행" aria-describedby="conditions-help conditions-error"></textarea><p class="hint" id="conditions-help">준비물이나 교실 환경 등 필요한 조건을 적어 주세요.</p><p class="error" id="conditions-error" aria-live="polite"></p></div>
+              </div>
+              <button class="primary-button" type="submit">활동 추천 <span aria-hidden="true">→</span></button>
+            </form>
+          </section>
+          <section class="card result-card" aria-labelledby="result-title">
+            <div class="section-heading"><div><p class="step">02 / 결과 확인</p><h2 id="result-title">추천 결과</h2></div></div>
+            <div class="result-content">
+              <div id="generated-results" aria-live="polite">
+                <div class="empty-state"><p>아직 표시할 내용이 없어요.</p><span>수업 정보를 입력하고 활동을 추천받아 보세요.</span></div>
+              </div>
+              <section class="input-summary-section" aria-labelledby="input-summary-title">
+                <h3 id="input-summary-title">입력한 내용</h3>
+                <div id="input-summary" aria-live="polite"><div class="empty-state"><span class="empty-icon" aria-hidden="true">✧</span><p>아직 표시할 내용이 없어요.</p><span>수업 정보를 입력하고 확인 버튼을 눌러 주세요.</span></div></div>
+              </section>
+            </div>
+            <button class="secondary-button" id="copy-all" type="button" disabled>전체 복사</button>
+            <p class="copy-status" id="copy-status" role="status" aria-live="polite"></p>
+            <button class="secondary-button" id="activity-csv-download" type="button" disabled>CSV 내려받기</button>
+          </section>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

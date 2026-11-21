@@ -1,0 +1,41 @@
+[
+  {
+    "name": "행성 순서 카드 배열하기",
+    "purpose": "태양에서 가까운 순서대로 행성을 배열하며 행성의 순서를 익힌다.",
+    "materials": "태양 그림 카드, 행성 이름 카드",
+    "steps": [
+      { "description": "행성 이름 카드를 살펴본다.", "minutes": 5 },
+      { "description": "모둠별로 태양에서 가까운 순서대로 카드를 배열한다.", "minutes": 10 },
+      { "description": "배열한 순서를 함께 확인한다.", "minutes": 5 }
+    ],
+    "teacherGuidance": "태양을 기준으로 행성의 순서를 생각하도록 질문한다.",
+    "studentTask": "행성 카드를 태양에서 가까운 순서대로 배열한다.",
+    "assessmentMethod": "모둠이 배열한 순서와 선택 이유를 확인한다."
+  },
+  {
+    "name": "행성 특징 카드 분류하기",
+    "purpose": "행성별 특징을 비교하고 알맞은 행성과 연결한다.",
+    "materials": "행성 특징 카드",
+    "steps": [
+      { "description": "특징 카드를 읽는다.", "minutes": 5 },
+      { "description": "특징을 행성 이름 카드와 짝짓는다.", "minutes": 15 },
+      { "description": "짝을 만든 근거를 발표한다.", "minutes": 10 }
+    ],
+    "teacherGuidance": "카드의 단서를 찾아 행성의 특징과 연결하게 안내한다.",
+    "studentTask": "행성 특징 카드를 읽고 알맞은 행성과 짝짓는다.",
+    "assessmentMethod": "짝짓기 결과와 발표 근거가 특징에 맞는지 확인한다."
+  },
+  {
+    "name": "행성 안내표 만들기",
+    "purpose": "선택한 행성의 특징을 정리해 설명한다.",
+    "materials": "행성 자료 카드, 종이, 색연필",
+    "steps": [
+      { "description": "소개할 행성을 하나 고른다.", "minutes": 5 },
+      { "description": "자료에서 특징을 찾아 안내표에 정리한다.", "minutes": 20 },
+      { "description": "안내표를 모둠원에게 소개한다.", "minutes": 15 }
+    ],
+    "teacherGuidance": "자료에서 확인한 사실을 사용해 행성의 특징을 정리하도록 안내한다.",
+    "studentTask": "행성 하나를 골라 특징 안내표를 만들고 설명한다.",
+    "assessmentMethod": "안내표에 행성의 특징이 담겼는지와 설명을 확인한다."
+  }
+]
