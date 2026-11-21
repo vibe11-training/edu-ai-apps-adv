@@ -1,5 +1,4 @@
 import { checkField, checkForm } from "./form-check.js";
-import { loadMockResults, ResultValidationError } from "./mock-results.js";
 import { quizCardsToCsv } from "./quiz-csv.js";
 import { activityCardsToCsv } from "./activity-csv.js";
 import { resultsToText } from "./result-copy.js";
